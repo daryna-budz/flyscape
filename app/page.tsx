@@ -1,4 +1,4 @@
-import './globals.css'
+
 import Image from "next/image";
 
 
@@ -14,7 +14,7 @@ export default function Page() {
           <button className='text-md uppercase border-2 border-black px-2 py-2 w-fit hover:text-white hover:bg-black hover:border-black transition duration-300 cursor-pointer'>Explore Trips</button>
         </div>
         <Image
-          src="/images/hero-img.svg"
+          src="/images/hero-img.png"
           alt="hero travel image"
           width={550}
           height={550}
