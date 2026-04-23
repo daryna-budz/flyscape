@@ -11,7 +11,7 @@ export default function AboutPage() {
             <div className='flex flex-col justify-center items-center gap-8'>
                 <div className='flex flex-col gap-6 md:flex-row md:gap-20'>
                     <Image
-                    src="/images/about-img.jpg"
+                    src="/images/about2.jpg"
                     alt="about travel image"
                     className="rounded-md"
                     width={700}
