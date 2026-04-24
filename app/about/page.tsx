@@ -17,10 +17,11 @@ export default function AboutPage() {
                     width={700}
                     height={700}
                     />
-                    <div className='flex flex-col items-left gap-6'>
+                    <div className='flex flex-col items-start gap-6'>
                         <p className='text-lg text-gray-600 uppercase md:block'>About Flyscape</p>
                         <h1 className='text-5xl font-bold max-w-lg md:text-6xl'>Global community of travelers</h1>
-                        <p className='text-lg text-gray-600 md: max-w-lg'>Launched in 2026, Flyscape is built for people who don’t just dream about traveling — they actually go. It’s a space where discovering new places and booking your next trip feels simple, fast, and exciting.<br /><br /> We believe travel should be effortless and inspiring, not overwhelming. That’s why we’re creating a platform where finding the right destination, the right price, and the right experience all come together — so you can focus on what really matters: the journey.</p>
+                        <p className='text-lg text-gray-600 md:max-w-lg'>Launched in 2026, Flyscape is built for people who don’t just dream about traveling — they actually go. It’s a space where discovering new places and booking your next trip feels simple, fast, and exciting.</p>
+                        <p className='text-lg text-gray-600 md:max-w-lg'>We believe travel should be effortless and inspiring, not overwhelming. That’s why we’re creating a platform where finding the right destination, the right price, and the right experience all come together — so you can focus on what really matters: the journey.</p>
                     </div>
                 </div>
             </div>
