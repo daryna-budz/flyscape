@@ -1,5 +1,6 @@
 
 import Image from "next/image";
+import Link from "next/link"
 
 
 
@@ -11,7 +12,7 @@ export default function Page() {
           <p className='hidden text-lg text-gray-600 uppercase md:block'>From inspiration to destination</p>
           <h1 className='text-5xl font-bold max-w-lg md:text-6xl'>Unlock unforgettable destinations at the best prices</h1>
           <p className='text-lg text-gray-600'>Explore the world through curated travel experiences and enjoy your next trip without stress</p>
-          <button className='text-md uppercase border-2 border-black px-2 py-2 w-fit hover:text-white hover:bg-black hover:border-black transition duration-300 cursor-pointer'>Explore Trips</button>
+          <Link href="/trips"><button className='text-md uppercase border-2 border-black px-2 py-2 w-fit hover:text-white hover:bg-black hover:border-black transition duration-300 cursor-pointer'>Explore Trips</button></Link>
         </div>
         <Image
           src="/images/hero-img.png"

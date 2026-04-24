@@ -1,5 +1,6 @@
 import './globals.css'
 import { Albert_Sans } from 'next/font/google';
+import Navbar from '@/components/Navbar';
 
 
 const albertsans = Albert_Sans({
@@ -16,6 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={albertsans.className}>
+        <Navbar />
         {children}
       </body>
     </html>
