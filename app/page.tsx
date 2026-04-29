@@ -15,7 +15,7 @@ export default function Page() {
           <Link href="/trips"><button className='text-md uppercase border-2 border-black px-2 py-2 w-fit hover:text-white hover:bg-black hover:border-black transition duration-300 cursor-pointer'>Explore Trips</button></Link>
         </div>
         <Image
-          src="/images/hero-img.png"
+          src="/images/hero-image.png"
           alt="hero travel image"
           width={550}
           height={550}
