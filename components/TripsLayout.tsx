@@ -31,8 +31,8 @@ export default function TripsLayout({ trips, }: {trips: Destination[]}){
 
              <div className="px-5 py-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                {trips.map((destination) => (
-                    <Link href={`/trips/${destination.id}`} key={destination.id}>
-                        <div className="flex flex-col h-full gap-5 shadow-md px-5 py-5 rounded-md grow">
+                    // <Link href={`/trips/${destination.id}`} key={destination.id}>
+                        <div key={destination.id} className="flex flex-col h-full gap-5 shadow-md px-5 py-5 rounded-md grow">
                             <div className="h-50 w-full overflow-hidden">
                                 <Image
                                         src={destination.image}
@@ -51,10 +51,10 @@ export default function TripsLayout({ trips, }: {trips: Destination[]}){
                                 </div>
                                 <p className="text-lg text-gray-600">{destination.description}</p>
 
-                                <button className='mt-auto text-lg border-2 border-black px-3 py-2 w-fit hover:text-white hover:bg-black hover:border-black transition duration-300 cursor-pointer'>View tickets &rarr;</button>
+                                <Link href={`/tickets/${destination.slug}`} className="mt-auto"><button className=' text-lg border-2 border-black px-3 py-2 w-fit hover:text-white hover:bg-black hover:border-black transition duration-300 cursor-pointer'>View tickets &rarr;</button></Link>
                             </div>
                         </div>
-                    </Link>
+                    // </Link>
                ))}
              </div>
         </>
