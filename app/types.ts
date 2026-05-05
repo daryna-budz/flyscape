@@ -9,3 +9,13 @@ export type Destination = {
     tags: string[];
     type: string;
   };
+
+export type FlightOffer = {
+  id: string;
+    owner: {
+        name: string;
+    };
+    total_amount: string;
+    total_currency: string;
+    passengers: any[];
+}
