@@ -1,7 +1,7 @@
 "use client"
 
-import { FlightOffer } from "@/app/types"
-import { useState, useEffect } from "react"
+import { FlightOffer, FlightOrder } from "@/app/types"
+import { useState, useEffect, FormEvent } from "react"
 
 export default function FlightSearch({ destinationCity, destinationAirport }: { destinationCity: string, destinationAirport: string }) {
     const [date, setDate] = useState('')
@@ -10,7 +10,19 @@ export default function FlightSearch({ destinationCity, destinationAirport }: { 
     const [inputValue, setInputValue] = useState("");
     const [suggestions, setSuggestions] = useState([]);
     const [selectedIata, setSelectedIata] = useState("");
+    const [bookingResult, setBookingResult] = useState<FlightOrder | null>(null);
     const [selectedOffer, setSelectedOffer] = useState<FlightOffer | null>(null);
+    const [passenger, setPassenger] = useState({
+        id: "",
+        title: "",
+        firstName: "",
+        lastName: "",
+        email: "",
+        birthDate: "",
+        phoneNumber: "",
+        gender: "",
+
+    });
 
     useEffect(() => {
         const fetchSuggestions = async () => {
@@ -38,12 +50,55 @@ export default function FlightSearch({ destinationCity, destinationAirport }: { 
             })
             const data = await res.json()
             setFlights(data.offers || [])
+            setLoading(false);
         } catch (err) {
             console.error("Search failed", err)
         } finally {
             setLoading(false)
         }
     }
+
+    const handleBook = async (e: FormEvent<HTMLFormElement>)=>{
+        e.preventDefault()
+        if (!selectedOffer) return;
+        setLoading(true);
+
+        try {
+            const res = await fetch('/api/flights/book', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    offerId: selectedOffer.id,
+                    passenger: {
+                        id: selectedOffer.passengers[0].id,
+                        title: passenger.title,
+                        given_name: passenger.firstName, 
+                        family_name: passenger.lastName,
+                        email: passenger.email,
+                        phone_number: passenger.phoneNumber,
+                        gender: passenger.gender,
+                        born_on: passenger.birthDate,
+                        totalAmount: selectedOffer.total_amount,
+                        totalCurrency: selectedOffer.total_currency
+                    }
+                })
+            });
+    
+            const data = await res.json();
+            console.log(data);
+            
+            if (data.order) {
+                setBookingResult(data.order);
+            } else {
+                alert("Booking failed: " + (data.error || "Unknown error"));
+            }
+        } catch (err) {
+            console.error("Booking failed", err);
+        } finally {
+            setLoading(false);
+        }
+    }
+
 
     return (
         <div className="flex flex-col gap-6">
@@ -98,7 +153,38 @@ export default function FlightSearch({ destinationCity, destinationAirport }: { 
             </button>
 
             <div className="flex flex-col gap-4 mt-4">
-                {selectedOffer ? (
+            {bookingResult ? (
+                    <div className="border-2 border-green-500 p-8 rounded-2xl bg-white shadow-2xl flex flex-col items-center text-center gap-4 animate-in zoom-in duration-500">
+                        <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-3xl">
+                            ✓
+                        </div>
+                        <h2 className="text-2xl font-black uppercase">Booking Confirmed!</h2>
+                        <p className="text-gray-500">Thank you for trusting <strong>FLYSCAPE</strong>. Your adventure starts here.</p>
+                        
+                        <div className="w-full border-t border-b border-dashed border-gray-200 py-6 my-2 flex flex-col gap-3">
+                            <div className="flex justify-between">
+                                <span className="text-gray-400 uppercase text-xs font-bold">Booking Ref</span>
+                                <span className="font-mono font-bold text-lg">{bookingResult.booking_reference}</span>
+                            </div>
+                            <div className="flex justify-between">
+                                <span className="text-gray-400 uppercase text-xs font-bold">Passenger</span>
+                                <span className="font-bold">{bookingResult.passengers[0].given_name} {bookingResult.passengers[0].family_name}</span>
+                            </div>
+                            <div className="flex justify-between">
+                                <span className="text-gray-400 uppercase text-xs font-bold">Status</span>
+                                <span className="text-green-600 font-bold uppercase text-sm">● Confirmed</span>
+                            </div>
+                        </div>
+
+                        <button 
+                            onClick={() => window.print()} 
+                            className="w-full border-2 border-black py-3 font-bold hover:bg-black hover:text-white transition cursor-pointer"
+                        >
+                            PRINT TICKET
+                        </button>
+                    </div>
+
+                ) : selectedOffer ? (
                         <div className="border-2 border-black p-6 rounded-xl bg-white flex flex-col gap-4 animate-in fade-in duration-300">
                             <div className="flex justify-between items-center mb-2">
                                 <h3 className="text-xl font-bold">Passenger Details</h3>
@@ -115,15 +201,44 @@ export default function FlightSearch({ destinationCity, destinationAirport }: { 
                                 <p><strong>Total:</strong> {selectedOffer.total_amount} {selectedOffer.total_currency}</p>
                             </div>
             
-                            <form className="flex flex-col gap-3">
+                            <form className="flex flex-col gap-3" onSubmit={handleBook}>
                                 <div className="grid grid-cols-2 gap-3">
-                                    <input type="text" placeholder="First Name" className="border p-2 rounded-md" required />
-                                    <input type="text" placeholder="Last Name" className="border p-2 rounded-md" required />
+                                    <input type="text" placeholder="First Name" className="border border-black rounded-md p-2 " value={passenger.firstName} onChange={(e) => setPassenger({...passenger, firstName: e.target.value})} required />
+                                    <input type="text" placeholder="Last Name" className="border border-black rounded-md p-2 " value={passenger.lastName} onChange={(e) => setPassenger({...passenger, lastName: e.target.value})} required />
                                 </div>
-                                <input type="email" placeholder="Email Address" className="border p-2 rounded-md" required />
+                                <input type="email" placeholder="Email Address" className="border border-black rounded-md p-2 " value={passenger.email} onChange={(e) => setPassenger({...passenger, email: e.target.value})} required />
                                 <div className="flex flex-col">
-                                    <label className="text-sm text-gray-500 mb-1"> Date of birth</label>
-                                    <input type="date" className="border p-2 rounded-md" title="Date of Birth" required />
+                                    <label className="text-sm text-gray-500 mb-1" > Date of birth</label>
+                                    <input type="date" className="border border-black rounded-md p-2 " title="Date of Birth" required value={passenger.birthDate} onChange={(e) => setPassenger({...passenger, birthDate: e.target.value})}/>
+                                </div>
+                                <div className="flex flex-col">
+                                   <label className="text-sm text-gray-500 mb-1" > Your Title</label>
+                                   <select className="border border-black rounded-md p-2 " value={passenger.title} onChange={(e) => setPassenger({...passenger, title: e.target.value})} required>
+                                      <option value="mr">Mr</option>
+                                      <option value="ms">Ms</option>
+                                      <option value="mrs">Mrs</option>
+                                   </select>
+                                </div>
+                                <div className="flex flex-col">
+                                   <label className="text-sm text-gray-500 mb-1" > Your Gender</label>
+                                   <select value={passenger.gender} onChange={(e) => setPassenger({...passenger, gender: e.target.value})} className="border border-black rounded-md p-2 " required>
+                                      <option value="m">Male</option>
+                                      <option value="f">Female</option>
+                                   </select>
+                                </div>
+                                <div className="flex flex-col">
+                                    <label className="text-sm text-gray-500 mb-1" > Your Phone Number</label>
+                                    <input
+                                        type="tel"
+                                        placeholder="+11234567890"
+                                        value={passenger.phoneNumber}
+                                        pattern="^\+[1-9]\d{1,14}$"
+                                        onChange={(e) =>
+                                            setPassenger({...passenger, phoneNumber: e.target.value})
+                                        }
+                                        className="border border-black rounded-md p-2 "
+                                        required
+                                    />
                                 </div>
                                 
                                 <button 

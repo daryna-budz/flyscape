@@ -19,3 +19,11 @@ export type FlightOffer = {
     total_currency: string;
     passengers: any[];
 }
+
+export type FlightOrder = {
+  booking_reference: string;
+  passengers: Array<{
+    given_name: string;
+    family_name: string;
+  }>;
+}

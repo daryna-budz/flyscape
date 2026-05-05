@@ -14,12 +14,12 @@ export async function POST(req: Request) {
       passengers: [
         {
           id: passenger.id,
-          given_name: passenger.firstName,
-          family_name: passenger.lastName,
+          given_name: passenger.given_name,
+          family_name: passenger.family_name,
           gender: passenger.gender,
-          born_on: passenger.birthDate,
+          born_on: passenger.born_on,
           email: passenger.email,
-          phone_number: passenger.phone,
+          phone_number: passenger.phone_number,
           title: passenger.title,
         },
       ],
