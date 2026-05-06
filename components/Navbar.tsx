@@ -9,7 +9,7 @@ export default function Navbar(){
                     <Image
                             src="/images/logo.png"
                             alt="logo image"
-                            className="w-30"
+                            className="w-25"
                             width={300}
                             height={300}
                     />
