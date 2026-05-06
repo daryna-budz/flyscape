@@ -125,16 +125,16 @@ npm run build
 ## 📸 Preview
 
 ### Home Page
-![Home](screenshots/home.png)
+![Home](./public/screenshots/home.png)
 
 ### Trips Page
-![Trips](screenshots/trips.png)
+![Trips](./public/screenshots/trips.png)
 
 ### Flight Page
-![Flight](screenshots/flights.png)
+![Flight](./public/screenshots/flights.png)
 
 ### Ticket Page
-![Ticket](screenshots/ticket.png)
+![Ticket](./public/screenshots/ticket.png)
 
 ---
 
