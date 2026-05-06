@@ -14,7 +14,7 @@ export default async function TripTicketPage({ params }: { params: Promise<{ slu
         <section className="px-10 py-12 gap-15 mx-auto max-w-8xl">
               <div className="flex flex-col gap-5">
                   <Link href="/trips">
-                      <button className='border-2 border-black px-3 py-2 cursor-pointer'>&larr; Back to trips</button>
+                      <button className='border-2 border-black px-3 py-2 cursor-pointer print:hidden'>&larr; Back to trips</button>
                   </Link>
                   <div className="px-5">
                      <h1 className="text-2xl font-bold mt-5">{destination.city}</h1>

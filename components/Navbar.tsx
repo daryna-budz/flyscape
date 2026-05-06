@@ -3,7 +3,7 @@ import Link from "next/link"
 
 export default function Navbar(){
     return (
-        <header className="sticky top-0 z-50 bg-[#f1f1f1]">
+        <header className="sticky top-0 z-50 bg-[#f1f1f1] print:hidden">
             <nav className="flex items-center justify-between px-8 md:px-12 max-w-8xl mx-auto" >
                  <Link href="/">
                     <Image
