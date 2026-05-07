@@ -1,6 +1,6 @@
 # ✈️ Flyscape Travel Booking App
 
-A modern travel booking web application that allows users to explore destinations, browse travel categories, search for available flights and book tickets.
+A full-stack flight booking app with real-time flight search powered by Duffel API, complete booking flow, and printable ticket generation.
 
 Built with a focus on responsive UI, dynamic routing, and interactive booking flows using modern frontend technologies.
 
