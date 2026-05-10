@@ -14,13 +14,13 @@ export default function FlightSearch({ destinationCity, destinationAirport }: { 
     const [selectedOffer, setSelectedOffer] = useState<FlightOffer | null>(null);
     const [passenger, setPassenger] = useState({
         id: "",
-        title: "",
+        title: "mr",
         firstName: "",
         lastName: "",
         email: "",
         birthDate: "",
         phoneNumber: "",
-        gender: "",
+        gender: "m",
 
     });
 
