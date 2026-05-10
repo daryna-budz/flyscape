@@ -68,7 +68,7 @@ export default function AboutPage() {
                     </div>
                 </div>
                 <Image
-                    src="/images/logo-new.png"
+                    src="/images/logo.png"
                     alt="logo image"
                     className="hidden md:block"
                     width={300}
