@@ -12,9 +12,9 @@ export const metadata = {
   title: 'FLYSCAPE',
   description: 'Your premium flight booking service',
   icons: {
-    icon: '/images/logo-new.png', 
-    shortcut: '/images/logo-new.png',
-    apple: '/images/logo-new.png',
+    icon: '/images/logo.png', 
+    shortcut: '/images/logo.png',
+    apple: '/images/logo.png',
   },
 }
 

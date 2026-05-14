@@ -32,7 +32,7 @@ export default function TripsLayout({ trips, }: {trips: Destination[]}){
              <div className="px-5 py-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                {trips.map((destination) => (
                     // <Link href={`/trips/${destination.id}`} key={destination.id}>
-                        <div key={destination.id} className="flex flex-col h-full gap-5 shadow-md px-5 py-5 rounded-md grow">
+                        <div key={destination.id} className="flex flex-col h-full gap-5 shadow-md px-5 py-5 rounded-md grow bg-[#f5f5f5]">
                             <div className="h-50 w-full overflow-hidden">
                                 <Image
                                         src={destination.image}
